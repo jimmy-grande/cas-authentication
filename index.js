@@ -250,9 +250,10 @@ CASAuthentication.prototype._login = function(req, res, next) {
     // Set up the query parameters.
     var query = {
         service: this.service_url + url.parse(req.url).pathname,
-        renew: this.renew
     };
-
+    if(this.renew) {
+        query.renew = this.renew
+    }
     // Redirect to the CAS login.
     res.redirect( this.cas_url + url.format({
         pathname: '/login',
